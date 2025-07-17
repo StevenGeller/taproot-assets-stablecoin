@@ -184,12 +184,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [LND](https://github.com/lightningnetwork/lnd) team
 - Cash App for UI/UX inspiration
 
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/taproot-assets-stablecoin/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/taproot-assets-stablecoin/discussions)
-- **Documentation**: [Full Docs](https://github.com/yourusername/taproot-assets-stablecoin/wiki)
-
 ## 🚧 Roadmap
 
 - [ ] Lightning Network channel integration
