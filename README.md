@@ -7,10 +7,6 @@
 
 A complete implementation of a USD stablecoin on Bitcoin using the Taproot Assets Protocol, featuring a Cash App-style wallet interface for easy peer-to-peer transactions.
 
-<p align="center">
-  <img src="docs/images/wallet-demo.png" alt="USDT Wallet Demo" width="600">
-</p>
-
 ## 🚀 Features
 
 - **Full Stablecoin Implementation**: 1,000,000 USDT minted on Bitcoin's Taproot Assets Protocol
