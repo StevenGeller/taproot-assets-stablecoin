@@ -1,0 +1,47 @@
+{
+  "asset": {
+    "name": "USD-Stablecoin",
+    "ticker": "USDT",
+    "description": "USD-backed stablecoin on Taproot Assets",
+    "image_url": "https://example.com/usdt-logo.png",
+    "meta": {
+      "issuer": "Your Organization",
+      "backing": "1:1 USD reserves",
+      "audit_url": "https://example.com/audits",
+      "terms_url": "https://example.com/terms"
+    }
+  },
+  "minting": {
+    "initial_supply": 1000000,
+    "decimal_places": 2,
+    "max_supply": 100000000,
+    "reissuable": true,
+    "batch_size": 10000
+  },
+  "universe": {
+    "sync_with": [
+      "testnet.universe.lightning.finance:443",
+      "universe.lightning.finance:443"
+    ],
+    "publish": true
+  },
+  "lightning": {
+    "enable_channels": true,
+    "min_channel_size": 100,
+    "max_channel_size": 1000000,
+    "exchange_rate": {
+      "mode": "fixed",
+      "btc_per_token": 0.00003,
+      "update_interval": 300
+    }
+  },
+  "compliance": {
+    "kyc_required": true,
+    "whitelist_enabled": true,
+    "transaction_limits": {
+      "daily": 50000,
+      "monthly": 500000
+    },
+    "blocked_countries": []
+  }
+}

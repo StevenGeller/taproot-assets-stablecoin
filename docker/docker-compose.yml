@@ -1,0 +1,129 @@
+version: '3.8'
+
+services:
+  bitcoin:
+    image: bitcoin/bitcoin:25.0
+    container_name: taproot-bitcoin
+    restart: unless-stopped
+    ports:
+      - "18443:18443"  # regtest RPC
+      - "18444:18444"  # regtest P2P
+    volumes:
+      - bitcoin_data:/home/bitcoin/.bitcoin
+      - ./bitcoin.conf:/home/bitcoin/.bitcoin/bitcoin.conf
+    environment:
+      - BITCOIN_NETWORK=regtest
+    command: >
+      bitcoind
+      -regtest
+      -server
+      -rpcallowip=0.0.0.0/0
+      -rpcbind=0.0.0.0:18443
+      -printtoconsole
+      -datadir=/home/bitcoin/.bitcoin
+    healthcheck:
+      test: ["CMD", "bitcoin-cli", "-regtest", "getblockchaininfo"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  lnd:
+    image: lightninglabs/lnd:v0.18.4-beta
+    container_name: taproot-lnd
+    restart: unless-stopped
+    depends_on:
+      bitcoin:
+        condition: service_healthy
+    ports:
+      - "10009:10009"  # gRPC
+      - "8080:8080"    # REST
+      - "9735:9735"    # P2P
+    volumes:
+      - lnd_data:/home/lnd/.lnd
+      - ./lnd.conf:/home/lnd/.lnd/lnd.conf
+    environment:
+      - LND_NETWORK=regtest
+    command: >
+      lnd
+      --configfile=/home/lnd/.lnd/lnd.conf
+      --datadir=/home/lnd/.lnd
+      --logdir=/home/lnd/.lnd/logs
+      --tlscertpath=/home/lnd/.lnd/tls.cert
+      --tlskeypath=/home/lnd/.lnd/tls.key
+      --adminmacaroonpath=/home/lnd/.lnd/data/chain/bitcoin/regtest/admin.macaroon
+      --readonlymacaroonpath=/home/lnd/.lnd/data/chain/bitcoin/regtest/readonly.macaroon
+      --invoicemacaroonpath=/home/lnd/.lnd/data/chain/bitcoin/regtest/invoice.macaroon
+    healthcheck:
+      test: ["CMD", "lncli", "--network=regtest", "getinfo"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  tapd:
+    build:
+      context: .
+      dockerfile: Dockerfile.tapd
+    container_name: taproot-tapd
+    restart: unless-stopped
+    depends_on:
+      lnd:
+        condition: service_healthy
+    ports:
+      - "8089:8089"  # REST
+    volumes:
+      - tapd_data:/home/tapd/.tapd
+      - lnd_data:/home/lnd/.lnd:ro
+    environment:
+      - TAPD_NETWORK=regtest
+    command: >
+      tapd
+      --network=regtest
+      --debuglevel=debug
+      --lnd.host=taproot-lnd:10009
+      --lnd.macaroonpath=/home/lnd/.lnd/data/chain/bitcoin/regtest/admin.macaroon
+      --lnd.tlspath=/home/lnd/.lnd/tls.cert
+      --restlisten=0.0.0.0:8089
+      --datadir=/home/tapd/.tapd
+    healthcheck:
+      test: ["CMD", "tapcli", "--network=regtest", "getinfo"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  wallet:
+    build:
+      context: .
+      dockerfile: Dockerfile.wallet
+    container_name: taproot-wallet
+    restart: unless-stopped
+    depends_on:
+      tapd:
+        condition: service_healthy
+    ports:
+      - "3000:3000"  # Web interface
+    volumes:
+      - wallet_data:/app/wallets
+      - tapd_data:/home/tapd/.tapd:ro
+      - lnd_data:/home/lnd/.lnd:ro
+    environment:
+      - NODE_ENV=production
+      - TAPD_HOST=taproot-tapd:8089
+      - ASSET_ID=60d399559238fd2f2d563989594bd641e60860384bc35c5c9509f1c8fe28bd3b
+    command: ["npm", "start"]
+
+volumes:
+  bitcoin_data:
+    driver: local
+  lnd_data:
+    driver: local
+  tapd_data:
+    driver: local
+  wallet_data:
+    driver: local
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

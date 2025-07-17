@@ -1,0 +1,94 @@
+# Bitcoin and Lightning Network
+.bitcoin/
+.lnd/
+.tapd/
+
+# Wallet data
+wallets/
+*.macaroon
+*.wallet
+*.seed
+
+# Logs
+*.log
+logs/
+*.out
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Backup files
+*.bak
+*.backup
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-*
+.project
+.settings/
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build artifacts
+build/
+dist/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Test coverage
+coverage/
+*.coverage
+.coverage
+htmlcov/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.Python
+
+# Go
+go.sum
+*.test
+*.prof
+
+# Docker volumes
+docker/data/
+
+# OS specific
+Thumbs.db
+.Spotlight-V100
+.Trashes
+
+# Project specific
+balance_tracker.txt
+transaction_*.json
+test_*.sh
+debug/
+
+# Sensitive files - Never commit these!
+*seed*.txt
+*password*.txt
+lnd-seed-*
+wallet-seed*
+wallet-password*
+*macaroon*
+STABLECOIN-INFO.txt
+.claude/settings.local.json
