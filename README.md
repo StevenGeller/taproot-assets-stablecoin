@@ -5,12 +5,12 @@
 [![Lightning](https://img.shields.io/badge/Lightning-Network-blue.svg)](https://lightning.network/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-A complete implementation of a USD stablecoin on Bitcoin using the Taproot Assets Protocol, featuring a Cash App-style wallet interface for easy peer-to-peer transactions.
+A complete implementation of a USD stablecoin on Bitcoin using the Taproot Assets Protocol, featuring a user-friendly wallet interface for easy peer-to-peer transactions.
 
 ## 🚀 Features
 
-- **Full Stablecoin Implementation**: 1,000,000 USDT minted on Bitcoin's Taproot Assets Protocol
-- **Cash App-Style Wallet**: Modern, user-friendly interface for sending and receiving USDT
+- **Full Stablecoin Implementation**: 1,000,000 XYZUSD minted on Bitcoin's Taproot Assets Protocol
+- **User-Friendly Wallet**: Modern interface for sending and receiving XYZUSD
 - **Lightning Network Ready**: Built on LND for future Lightning channel integration
 - **Individual User Balances**: Track balances for multiple users (Alice, Bob, etc.)
 - **Complete Transaction History**: View all transfers with blockchain confirmations
@@ -56,7 +56,7 @@ This will install and configure:
 ```
 taproot-assets-stablecoin/
 ├── bin/                    # Main executables
-│   ├── usdt-wallet        # Cash App-style wallet
+│   ├── xyzusd-wallet      # User-friendly wallet
 │   ├── setup              # Setup script
 │   └── demo               # Interactive demo
 ├── src/                    # Source code
@@ -74,15 +74,15 @@ taproot-assets-stablecoin/
 
 ### Core Components
 
-#### 1. **USDT Stablecoin**
+#### 1. **XYZUSD Stablecoin**
 - Asset ID: `60d399559238fd2f2d563989594bd641e60860384bc35c5c9509f1c8fe28bd3b`
-- Total Supply: 1,000,000 USDT
+- Total Supply: 1,000,000 XYZUSD
 - Type: Grouped Asset (supports additional minting)
 - Decimal Places: 2
 
-#### 2. **Cash App-Style Wallet**
+#### 2. **User-Friendly Wallet**
 - User-friendly interface with balance tracking
-- Send/receive USDT between users
+- Send/receive XYZUSD between users
 - Transaction history with blockchain confirmations
 - Multiple user support (Alice, Bob, etc.)
 
@@ -103,7 +103,7 @@ taproot-assets-stablecoin/
 ./src/wallet/balance-tracker.sh
 ```
 
-### Mint Additional USDT
+### Mint Additional XYZUSD
 ```bash
 ./src/utils/mint-asset.sh --amount 100000
 ```
@@ -156,11 +156,11 @@ The system has processed multiple real transactions:
 
 | Block | Amount | Type | Status |
 |-------|--------|------|--------|
-| 314 | 200 USDT | Transfer to Alice | ✅ Confirmed |
-| 315 | 150 USDT | Transfer to Bob | ✅ Confirmed |
+| 314 | 200 XYZUSD | Transfer to Alice | ✅ Confirmed |
+| 315 | 150 XYZUSD | Transfer to Bob | ✅ Confirmed |
 | 316-321 | Various | Test transactions | ✅ Confirmed |
 
-Total: 1,350 USDT transferred across 9 on-chain transactions
+Total: 1,350 XYZUSD transferred across 9 on-chain transactions
 
 ## 🔐 Security Considerations
 
@@ -178,7 +178,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Lightning Labs](https://lightning.engineering/) for Taproot Assets Protocol
 - [Bitcoin Core](https://bitcoin.org/) developers
 - [LND](https://github.com/lightningnetwork/lnd) team
-- Cash App for UI/UX inspiration
 
 ## 🚧 Roadmap
 

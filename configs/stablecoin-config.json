@@ -1,7 +1,7 @@
 {
   "asset": {
     "name": "USD-Stablecoin",
-    "ticker": "USDT",
+    "ticker": "XYZUSD",
     "description": "USD-backed stablecoin on Taproot Assets",
     "image_url": "https://example.com/usdt-logo.png",
     "meta": {

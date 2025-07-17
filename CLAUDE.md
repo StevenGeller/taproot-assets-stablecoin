@@ -90,9 +90,9 @@ tapcli --network=regtest assets transfers
 
 ### Asset Details
 - **Asset Name**: USD-Stablecoin  
-- **Ticker**: USDT
-- **Total Supply**: 1,000,000 USDT
-- **Max Supply**: 100,000,000 USDT (configurable)
+- **Ticker**: XYZUSD
+- **Total Supply**: 1,000,000 XYZUSD
+- **Max Supply**: 100,000,000 XYZUSD (configurable)
 - **Type**: Grouped Asset (supports additional minting)
 - **Decimal Places**: 2
 - **Backing**: 1:1 USD reserves (per config)
@@ -121,7 +121,7 @@ User Input → Cash App Wallet → Taproot Assets → LND → Bitcoin Core → B
 - Alice and Bob are pre-configured test users with tracked balances
 - Balance tracking via JSON files in `wallets/user_balances.json`
 - Transaction history stored in `wallets/transaction_history.json`
-- Current balances: Alice (600 USDT), Bob (450 USDT), System (998,750 USDT)
+- Current balances: Alice (600 XYZUSD), Bob (450 XYZUSD), System (998,750 XYZUSD)
 - Custom addresses supported for external transfers
 
 ## Development Notes
